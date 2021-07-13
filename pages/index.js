@@ -3,8 +3,17 @@ import Head from "next/head";
 import Navbar from "../components/Navbar";
 import Todo from "../components/Todo";
 import { table, minifyRecords } from "./api/utils/Airtable";
+import { TodosContext } from "../contexts/TodosContext";
+import { useEffect, useContext } from "react";
 
 export default function Home({ initialTodos }) {
+  const { todos, setTodos } = useContext(TodosContext); //getting accecss to the properties
+  //taking only 2 rn, (todos, settodos, refreshtodos, updatetodos, deletetodods,addtoto) it using this call
+
+  useEffect(() => {
+    setTodos(initialTodos);
+  }, []);
+
   console.log(initialTodos);
   return (
     <div>
@@ -16,9 +25,7 @@ export default function Home({ initialTodos }) {
       <main>
         <h1>To-do App</h1>
         <ul>
-          {initialTodos.map((todo) => (
-            <Todo key={todo.id} todo={todo} />
-          ))}
+          {todos && todos.map((todo) => <Todo key={todo.id} todo={todo} />)}
         </ul>
       </main>
     </div>
