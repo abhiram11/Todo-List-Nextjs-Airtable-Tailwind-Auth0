@@ -9,6 +9,8 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
 const table = base(process.env.AIRTABLE_TABLE_NAME);
 
 const minifyRecords = (records) => {
+  console.log("APi keY:", process.env.AIRTABLE_API_KEY);
+
   return records.map((record) => getMinifiedRecord(record));
 };
 
